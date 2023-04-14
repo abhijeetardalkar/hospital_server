@@ -1,14 +1,14 @@
-import app from './config/express.js';
+import app from "./config/express.js";
 
-try{
+try {
   app.listen(4000, () => {
-    console.log(`Server started check log /appserver.log`);
+    console.log(`Server started on 4000 check log /appserver.log`);
     // logger.info(
     //   `Server started on port   ( ) at ${new Date().toISOString()}`
     // );
   });
-}catch(e){
-  console.log(e)
+} catch (e) {
+  console.log(e);
 }
 
 //  });

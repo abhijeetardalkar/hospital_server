@@ -5,8 +5,10 @@ const getConn = async () => {
   const pool = mysql.createPool({
     host: "localhost",
     user: "root",
-    password: "ham242k24MYSQL$",
-    database: "donor_network",
+    password: "12345",
+    database: "hospital",
+    // password: "ham242k24MYSQL$",
+    // database: "donor_network",
     waitForConnections: true,
     connectionLimit: 10,
     maxIdle: 10, // max idle connections, the default value is the same as `connectionLimit`
@@ -17,4 +19,4 @@ const getConn = async () => {
   return promisePool;
 };
 
-export {getConn};
+export { getConn };
