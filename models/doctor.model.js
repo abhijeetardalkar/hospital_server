@@ -51,4 +51,33 @@ doctorModel.insertDoctor = async (input) => {
 
   // }
 };
+doctorModel.updateDoctor = async (input) => {
+  try {
+    let conn = await getConn();
+    // console.log({ input });
+    return await executeProcedure(
+      conn,
+      input,
+      "doctor_update(?,?,?,?,?,?,?,?,?,?,?,?,?)"
+    );
+  } catch (error) {
+    console.log(error);
+  }
+
+  //   {
+  //     "login_id":"pat_4" ,
+  //   "password" :"test",
+  //   "first_name":"Imran" ,
+  //   "middle_name":"F" ,
+  //   "last_name":"Khan" ,
+  //   "mobile":"8579452189" ,
+  //   "education":null
+  //   "specialty" :null
+  //   "email":null ,
+  //   "dob"  :null,
+  //   "address" :null,
+  //   "gender":null  ,
+  //   "doc_id":null
+  // }
+};
 export default doctorModel;

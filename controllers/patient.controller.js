@@ -57,4 +57,17 @@ patientController.insertPatient = async (req, res) => {
   }
 };
 
+patientController.updatePatient = async (req, res) => {
+  try {
+    let { ...input } = req?.body;
+
+    const pat_data = await patientModel.updatePatient(input);
+    res.status(200).json({
+      pat_data: pat_data,
+    });
+  } catch (ex) {
+    console.log(ex);
+  }
+};
+
 export default patientController;

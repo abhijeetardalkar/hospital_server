@@ -36,4 +36,17 @@ doctorController.insertDoctor = async (req, res) => {
     console.log(ex);
   }
 };
+
+doctorController.updateDoctor = async (req, res) => {
+  try {
+    let { ...input } = req?.body;
+    console.log({ input });
+    const doc_data = await doctorModel.updateDoctor(input);
+    res.status(200).json({
+      doc_data: doc_data,
+    });
+  } catch (ex) {
+    console.log(ex);
+  }
+};
 export default doctorController;

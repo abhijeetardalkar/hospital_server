@@ -6,5 +6,6 @@ const router = express.Router();
 router.get("/allDoctors", asyncHandler(doctorController.getDoctors));
 router.get("/getDoctor", asyncHandler(doctorController.getDoctor));
 router.post("/insertDoctor", asyncHandler(doctorController.insertDoctor));
+router.post("/updateDoctor", asyncHandler(doctorController.updateDoctor));
 
 export default router;
