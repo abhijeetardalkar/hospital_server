@@ -32,7 +32,8 @@ patientModel.insertPatient = async (input) => {
       "patient_insert(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
     );
   } catch (error) {
-    console.log(error);
+    // console.log({ error });
+    return { error };
   }
   // {
   //   "login_id":"pat_4" ,

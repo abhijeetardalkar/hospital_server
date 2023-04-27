@@ -47,13 +47,18 @@ patientController.insertPatient = async (req, res) => {
     //   smoke,
     // };
     // console.log({ input });
+    // console.log({ req });
 
     const pat_data = await patientModel.insertPatient(input);
+    console.log({ pat_data });
     res.status(200).json({
       pat_data: pat_data,
     });
   } catch (ex) {
-    console.log(ex);
+    console.log({ ex });
+    res.status(200).json({
+      error: error,
+    });
   }
 };
 
