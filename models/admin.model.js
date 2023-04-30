@@ -1,44 +1,35 @@
 import { getConn } from "../config/mysqlClient.js";
 import { executeProcedure } from "../utils/executeProcedure.js";
 
-const patientModel = {};
+const adminModel = {};
 
-patientModel.getPatients = async () => {
+adminModel.getAdmins = async () => {
   try {
     let conn = await getConn();
-    return await executeProcedure(conn, null, "patient_select(0)");
+    return await executeProcedure(conn, null, "admin_select(0)");
   } catch (error) {
     console.log(error);
   }
 };
 
-patientModel.getPatient = async (input) => {
-  try {
-    let conn = await getConn();
-    console.log({ input });
-    return await executeProcedure(conn, input, "patient_select(?)");
-  } catch (error) {
-    console.log(error);
-  }
-};
-patientModel.getPatientByID = async (input) => {
+adminModel.getAdmin = async (input) => {
   try {
     let conn = await getConn();
     console.log({ input });
-    return await executeProcedure(conn, input, "patient_select_by_id(?)");
+    return await executeProcedure(conn, input, "admin_select(?)");
   } catch (error) {
     console.log(error);
   }
 };
 
-patientModel.insertPatient = async (input) => {
+adminModel.insertAdmin = async (input) => {
   try {
     let conn = await getConn();
     // console.log({ input });
     return await executeProcedure(
       conn,
       input,
-      "patient_insert(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+      "admin_insert(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
     );
   } catch (error) {
     // console.log({ error });
@@ -65,14 +56,14 @@ patientModel.insertPatient = async (input) => {
   // "smoke":null
   // }
 };
-patientModel.updatePatient = async (input) => {
+adminModel.updateAdmin = async (input) => {
   try {
     let conn = await getConn();
     // console.log({ input });
     return await executeProcedure(
       conn,
       input,
-      "patient_update(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+      "admin_update(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
     );
   } catch (error) {
     console.log(error);
@@ -100,4 +91,4 @@ patientModel.updatePatient = async (input) => {
   // }
 };
 
-export default patientModel;
+export default adminModel;

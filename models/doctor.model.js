@@ -21,6 +21,50 @@ doctorModel.getDoctor = async (input) => {
     console.log(error);
   }
 };
+doctorModel.getAppointment = async (input) => {
+  try {
+    let conn = await getConn();
+    console.log({ input });
+    return await executeProcedure(conn, input, "visit_select(?)");
+  } catch (error) {
+    console.log(error);
+  }
+};
+doctorModel.getAppointmentByPatient = async (input) => {
+  try {
+    let conn = await getConn();
+    console.log({ input });
+    return await executeProcedure(conn, input, "visit_select_by_patient(?)");
+  } catch (error) {
+    console.log(error);
+  }
+};
+doctorModel.getAppointmentByDoctor = async (input) => {
+  try {
+    let conn = await getConn();
+    console.log({ input });
+    return await executeProcedure(
+      conn,
+      input,
+      "visit_select_by_doctor(?,?,?,?)"
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+doctorModel.getAppointmentByDoctorPatient = async (input) => {
+  try {
+    let conn = await getConn();
+    console.log({ input });
+    return await executeProcedure(
+      conn,
+      input,
+      "visit_select_by_doctor_patient(?,?)"
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 doctorModel.insertDoctor = async (input) => {
   try {
@@ -51,6 +95,7 @@ doctorModel.insertDoctor = async (input) => {
 
   // }
 };
+
 doctorModel.updateDoctor = async (input) => {
   try {
     let conn = await getConn();
@@ -79,5 +124,19 @@ doctorModel.updateDoctor = async (input) => {
   //   "gender":null  ,
   //   "doc_id":null
   // }
+};
+
+doctorModel.createAppointment = async (input) => {
+  try {
+    let conn = await getConn();
+    // console.log({ input });
+    return await executeProcedure(
+      conn,
+      input,
+      "visit_insert(?,?,?,?,?,?,?,?,?,?)"
+    );
+  } catch (error) {
+    console.log(error);
+  }
 };
 export default doctorModel;

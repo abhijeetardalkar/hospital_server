@@ -1,9 +1,9 @@
-import patientModel from "../models/patient.model.js";
-const patientController = {};
+import adminModel from "../models/admin.model.js";
+const adminController = {};
 
-patientController.getPatients = async (req, res) => {
+adminController.getAdmins = async (req, res) => {
   try {
-    const user_data = await patientModel.getPatients();
+    const user_data = await adminModel.getAdmins();
     res.status(200).json({
       user_data: user_data,
     });
@@ -11,21 +11,10 @@ patientController.getPatients = async (req, res) => {
     console.log(error);
   }
 };
-patientController.getPatient = async (req, res) => {
+adminController.getAdmin = async (req, res) => {
   try {
     let input = { id: req.body.id };
-    const user_data = await patientModel.getPatient(input);
-    res.status(200).json({
-      user_data: user_data,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
-patientController.getPatientByID = async (req, res) => {
-  try {
-    let input = { id: req.body.id };
-    const user_data = await patientModel.getPatientByID(input);
+    const user_data = await adminModel.getAdmin(input);
     res.status(200).json({
       user_data: user_data,
     });
@@ -34,7 +23,7 @@ patientController.getPatientByID = async (req, res) => {
   }
 };
 
-patientController.insertPatient = async (req, res) => {
+adminController.insertAdmin = async (req, res) => {
   try {
     let { ...input } = req?.body;
     // let input = {
@@ -60,7 +49,7 @@ patientController.insertPatient = async (req, res) => {
     // console.log({ input });
     // console.log({ req });
 
-    const user_data = await patientModel.insertPatient(input);
+    const user_data = await adminModel.insertAdmin(input);
     console.log({ user_data });
     res.status(200).json({
       user_data: user_data,
@@ -73,11 +62,11 @@ patientController.insertPatient = async (req, res) => {
   }
 };
 
-patientController.updatePatient = async (req, res) => {
+adminController.updateAdmin = async (req, res) => {
   try {
     let { ...input } = req?.body;
 
-    const user_data = await patientModel.updatePatient(input);
+    const user_data = await adminModel.updateAdmin(input);
     res.status(200).json({
       user_data: user_data,
     });
@@ -86,4 +75,4 @@ patientController.updatePatient = async (req, res) => {
   }
 };
 
-export default patientController;
+export default adminController;
