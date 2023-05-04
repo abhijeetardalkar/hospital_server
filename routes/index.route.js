@@ -1,5 +1,6 @@
 import express from "express";
 const router = express.Router(); // eslint-disable-line new-cap
+import articleRoutes from "./article.route.js";
 import noteRoutes from "./note.route.js";
 import doctorRoutes from "./doctor.route.js";
 import patientRoutes from "./patient.route.js";
@@ -10,6 +11,7 @@ router.get("/health-check", (req, res) => {
   console.log("dgfd");
   res.send("OK");
 });
+router.use("/blog", articleRoutes);
 router.use("/note", noteRoutes);
 router.use("/doctor", doctorRoutes);
 router.use("/patient", patientRoutes);

@@ -1,7 +1,9 @@
 // /* eslint-disable global-require */
 // // eslint-disable-next-line no-unused-vars
 import path, { dirname } from "path";
+
 import { fileURLToPath } from "url";
+import fileupload from "express-fileupload";
 // //const passport =  from './passport';
 import express from "express";
 import httpError from "http-errors";
@@ -13,6 +15,7 @@ import cors from "cors";
 import helmet from "helmet";
 // const { POSTMAN_COLLECTION_URL } =  from '../utils/constants.js';
 import routes from "../routes/index.route.js";
+import fs from "fs";
 // const config =  from './config';
 // const logger =  from '../utils/apps/logger';
 // const { handleError } =  from '../utils/apps/errorHandler';
@@ -23,14 +26,15 @@ import routes from "../routes/index.route.js";
 const app = express();
 
 // Choose where to serve the assets from
-const assetsDir = "../../assets/";
+// const assetsDir = "../../assets/";
+const assetsDir = "../public";
 const __filename = fileURLToPath(import.meta.url);
 
 const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, assetsDir)));
 
 // logger.info(`Assets Dir: ${assetsDir}`);
-
+app.use(fileupload());
 app.use(bodyParser.json({ limit: "2mb" }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -69,12 +73,19 @@ app.use("/api/", routes);
 // file upload
 
 app.post("/upload", (req, res, next) => {
-  console.log("UPLOADING>>>", req.body);
+  // create folder if not there
+  console.log("UPLOADING>>>", req.files);
+  // console.log("OTHER>>>", );
   let uploadFile = req.files.file;
   const name = uploadFile.name;
-  const md5 = uploadFile.md5();
-  const saveAs = `${md5}_${name}`;
-  uploadFile.mv(`${__dirname}/public/files/${saveAs}`, function (err) {
+
+  const folder = req.body.folder;
+  // const md5 = uploadFile.md5();
+  let ran = Date.now();
+  const saveAs = `/${folder}/${ran}_${name}`;
+  console.log({ __dirname });
+  // uploadFile.mv(`${__dirname}/public/files/${saveAs}`, function (err) {
+  uploadFile.mv(`public${saveAs}`, function (err) {
     if (err) {
       return res.status(500).send(err);
     }
@@ -82,6 +93,25 @@ app.post("/upload", (req, res, next) => {
   });
 });
 
+// const saveFile = (req, res) => {
+//   console.log("UPLOADING>>>", req.files);
+//   // console.log("OTHER>>>", );
+//   let uploadFile = req.files.file;
+//   const name = uploadFile.name;
+
+//   const folder = req.body.folder;
+//   // const md5 = uploadFile.md5();
+//   let ran = Date.now();
+//   const saveAs = `/${folder}/${ran}_${name}`;
+//   console.log({ __dirname });
+//   // uploadFile.mv(`${__dirname}/public/files/${saveAs}`, function (err) {
+//   uploadFile.mv(`public${saveAs}`, function (err) {
+//     if (err) {
+//       return res.status(500).send(err);
+//     }
+//     return res.status(200).json({ status: "uploaded", name, saveAs });
+//   });
+// };
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   const err = new httpError(404);

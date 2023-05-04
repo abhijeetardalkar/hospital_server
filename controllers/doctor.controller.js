@@ -25,7 +25,12 @@ doctorController.getDoctor = async (req, res) => {
 };
 doctorController.getAppointment = async (req, res) => {
   try {
-    let input = { id: req.body.id };
+    // let input = { id: req.body.id };
+    let input = {
+      visit_id: req.body.visit_id,
+      visit_date: req.body.visit_date,
+      visit_date2: req.body.visit_date2,
+    };
     const doc_data = await doctorModel.getAppointment(input);
     res.status(200).json({
       user_data: doc_data,
@@ -36,10 +41,14 @@ doctorController.getAppointment = async (req, res) => {
 };
 doctorController.getAppointmentByPatient = async (req, res) => {
   try {
-    let input = { id: req.body.id };
+    let input = {
+      pat_id: req.body.pat_id,
+      visit_date: req.body.visit_date,
+      visit_date2: req.body.visit_date2,
+    };
     const doc_data = await doctorModel.getAppointmentByPatient(input);
     res.status(200).json({
-      user_data: doc_data,
+      history_data: doc_data,
     });
   } catch (error) {
     console.log(error);
