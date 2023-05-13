@@ -90,5 +90,27 @@ adminModel.updateAdmin = async (input) => {
   // "pat_id":null
   // }
 };
+adminModel.updateDoctorActivation = async (input) => {
+  try {
+    let conn = await getConn();
+    console.log({ input });
+    return await executeProcedure(
+      conn,
+      input,
+      "doctor_activation_update(?,?,?)"
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+adminModel.updateUserPassword = async (input) => {
+  try {
+    let conn = await getConn();
+    console.log({ input });
+    return await executeProcedure(conn, input, "user_password_update(?,?,?,?)");
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export default adminModel;

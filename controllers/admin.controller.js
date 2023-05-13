@@ -74,5 +74,29 @@ adminController.updateAdmin = async (req, res) => {
     console.log(ex);
   }
 };
+adminController.updateDoctorActivation = async (req, res) => {
+  try {
+    let { ...input } = req?.body;
+
+    const user_data = await adminModel.updateDoctorActivation(input);
+    res.status(200).json({
+      user_data: user_data,
+    });
+  } catch (ex) {
+    console.log(ex);
+  }
+};
+adminController.updateUserPassword = async (req, res) => {
+  try {
+    let { ...input } = req?.body;
+
+    const user_data = await adminModel.updateUserPassword(input);
+    res.status(200).json({
+      user_data: user_data,
+    });
+  } catch (ex) {
+    console.log(ex);
+  }
+};
 
 export default adminController;
