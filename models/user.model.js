@@ -9,6 +9,8 @@ userModel.userLogin = async (input) => {
     // simple query
 
     return await executeProcedure(conn, input, "login_with_type(?,?,?)");
+    // return with hash
+    return await executeProcedure(conn, input, "login_with_type_enc(?,?)");
   } catch (error) {
     console.log(error);
   }

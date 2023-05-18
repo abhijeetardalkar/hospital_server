@@ -1,4 +1,6 @@
 import doctorModel from "../models/doctor.model.js";
+import bcrypt from "bcrypt";
+const SALT_ROUND = 10;
 const doctorController = {};
 
 doctorController.getDoctors = async (req, res) => {
@@ -86,6 +88,17 @@ doctorController.insertDoctor = async (req, res) => {
   try {
     let { ...input } = req?.body;
     console.log({ input });
+
+    // insert pwd with hash
+    // bcrypt.hash(input.password, SALT_ROUND, async function (err, hash) {
+    //   // Store hash in your password DB.
+    //   input.password = hash;
+    //   const doc_data = await doctorModel.insertDoctor(input);
+    //   res.status(200).json({
+    //     doc_data: doc_data,
+    //   });
+    // });
+
     const doc_data = await doctorModel.insertDoctor(input);
     res.status(200).json({
       doc_data: doc_data,

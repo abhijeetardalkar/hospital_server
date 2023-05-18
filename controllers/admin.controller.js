@@ -86,11 +86,14 @@ adminController.updateDoctorActivation = async (req, res) => {
     console.log(ex);
   }
 };
+// with hash
 adminController.updateUserPassword = async (req, res) => {
   try {
     let { ...input } = req?.body;
-
+    // console.log({ input });
+    // return;
     const user_data = await adminModel.updateUserPassword(input);
+
     res.status(200).json({
       user_data: user_data,
     });
@@ -98,5 +101,17 @@ adminController.updateUserPassword = async (req, res) => {
     console.log(ex);
   }
 };
+// adminController.updateUserPassword = async (req, res) => {
+//   try {
+//     let { ...input } = req?.body;
+
+//     const user_data = await adminModel.updateUserPassword(input);
+//     res.status(200).json({
+//       user_data: user_data,
+//     });
+//   } catch (ex) {
+//     console.log(ex);
+//   }
+// };
 
 export default adminController;
