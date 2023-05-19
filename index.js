@@ -1,5 +1,6 @@
 import app from "./config/express.js";
-
+import d from "dotenv";
+d.config();
 try {
   app.listen(4000, () => {
     console.log(`Server started on 4000 check log /appserver.log`);

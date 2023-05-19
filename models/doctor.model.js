@@ -21,6 +21,15 @@ doctorModel.getDoctor = async (input) => {
     console.log(error);
   }
 };
+doctorModel.getDoctorByID = async (input) => {
+  try {
+    let conn = await getConn();
+    console.log("id", { input });
+    return await executeProcedure(conn, input, "doctor_select_by_id(?)");
+  } catch (error) {
+    console.log(error);
+  }
+};
 doctorModel.getAppointment = async (input) => {
   try {
     let conn = await getConn();
@@ -46,7 +55,7 @@ doctorModel.getAppointmentByPatient = async (input) => {
 doctorModel.getAppointmentByDoctor = async (input) => {
   try {
     let conn = await getConn();
-    console.log({ input });
+    // console.log({ input });
     return await executeProcedure(
       conn,
       input,
@@ -74,6 +83,7 @@ doctorModel.insertDoctor = async (input) => {
   try {
     let conn = await getConn();
     // console.log({ input });
+
     return await executeProcedure(
       conn,
       input,

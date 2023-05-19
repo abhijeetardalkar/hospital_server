@@ -1,4 +1,6 @@
 import patientModel from "../models/patient.model.js";
+import bcrypt from "bcrypt";
+import { SALT_ROUND } from "../utils/commonFunctions.js";
 const patientController = {};
 
 patientController.getPatients = async (req, res) => {
@@ -60,11 +62,20 @@ patientController.insertPatient = async (req, res) => {
     // console.log({ input });
     // console.log({ req });
 
-    const user_data = await patientModel.insertPatient(input);
-    console.log({ user_data });
-    res.status(200).json({
-      user_data: user_data,
+    bcrypt.hash(input.password, SALT_ROUND, async function (err, hash) {
+      // Store hash in your password DB.
+      input.password = hash;
+      const user_data = await patientModel.insertPatient(input);
+      res.status(200).json({
+        user_data: user_data,
+      });
     });
+    // const user_data = await patientModel.insertPatient(input);
+    // console.log({ user_data });
+
+    // res.status(200).json({
+    //   user_data: user_data,
+    // });
   } catch (ex) {
     console.log({ ex });
     res.status(200).json({

@@ -8,7 +8,7 @@ userModel.userLogin = async (input) => {
     let conn = await getConn();
     // simple query
 
-    return await executeProcedure(conn, input, "login_with_type(?,?,?)");
+    // return await executeProcedure(conn, input, "login_with_type(?,?,?)");
     // return with hash
     return await executeProcedure(conn, input, "login_with_type_enc(?,?)");
   } catch (error) {

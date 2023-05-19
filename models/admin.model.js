@@ -107,7 +107,27 @@ adminModel.updateUserPassword = async (input) => {
   try {
     let conn = await getConn();
     console.log({ input });
+    // with bcrypt
+    return await executeProcedure(
+      conn,
+      input,
+      "user_password_update_step1_enc(?,?,?,?)"
+    );
     return await executeProcedure(conn, input, "user_password_update(?,?,?,?)");
+  } catch (error) {
+    console.log(error);
+  }
+};
+adminModel.updateUserPasswordStep2 = async (input) => {
+  try {
+    let conn = await getConn();
+    console.log({ input });
+    // with bcrypt
+    return await executeProcedure(
+      conn,
+      input,
+      "user_password_update_step2_enc(?,?,?)"
+    );
   } catch (error) {
     console.log(error);
   }

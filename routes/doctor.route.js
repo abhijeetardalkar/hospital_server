@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.get("/allDoctors", asyncHandler(doctorController.getDoctors));
 router.post("/getDoctor", asyncHandler(doctorController.getDoctor));
+router.post("/getDoctorByID", asyncHandler(doctorController.getDoctorByID));
 router.post("/insertDoctor", asyncHandler(doctorController.insertDoctor));
 router.post("/updateDoctor", asyncHandler(doctorController.updateDoctor));
 router.post(
