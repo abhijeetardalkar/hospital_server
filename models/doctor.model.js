@@ -15,7 +15,7 @@ doctorModel.getDoctors = async () => {
 doctorModel.getDoctor = async (input) => {
   try {
     let conn = await getConn();
-    console.log({ input });
+    // console.log({ input });
     return await executeProcedure(conn, input, "doctor_select(?)");
   } catch (error) {
     console.log(error);
@@ -24,7 +24,7 @@ doctorModel.getDoctor = async (input) => {
 doctorModel.getDoctorByID = async (input) => {
   try {
     let conn = await getConn();
-    console.log("id", { input });
+    // console.log("id", { input });
     return await executeProcedure(conn, input, "doctor_select_by_id(?)");
   } catch (error) {
     console.log(error);
@@ -33,7 +33,7 @@ doctorModel.getDoctorByID = async (input) => {
 doctorModel.getAppointment = async (input) => {
   try {
     let conn = await getConn();
-    console.log({ input });
+    // console.log({ input });
     return await executeProcedure(conn, input, "visit_select(?,?,?)");
   } catch (error) {
     console.log(error);
@@ -42,7 +42,7 @@ doctorModel.getAppointment = async (input) => {
 doctorModel.getAppointmentByPatient = async (input) => {
   try {
     let conn = await getConn();
-    console.log({ input });
+    // console.log({ input });
     return await executeProcedure(
       conn,
       input,
@@ -68,7 +68,7 @@ doctorModel.getAppointmentByDoctor = async (input) => {
 doctorModel.getAppointmentByDoctorPatient = async (input) => {
   try {
     let conn = await getConn();
-    console.log({ input });
+    // console.log({ input });
     return await executeProcedure(
       conn,
       input,
@@ -113,11 +113,12 @@ doctorModel.insertDoctor = async (input) => {
 doctorModel.updateDoctor = async (input) => {
   try {
     let conn = await getConn();
-    // console.log({ input });
+    console.log("upd>>", { input });
     return await executeProcedure(
       conn,
       input,
-      "doctor_update(?,?,?,?,?,?,?,?,?,?,?,?,?)"
+      "doctor_update(?,?,?,?,?,?,?,?,?)"
+      // "doctor_update(?,?,?,?,?,?,?,?,?,?,?,?,?)"
     );
   } catch (error) {
     console.log(error);
