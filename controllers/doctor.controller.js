@@ -12,7 +12,7 @@ const doctorController = {};
 
 doctorController.getDoctors = async (req, res) => {
   try {
-    console.log(req.body, req.query);
+    // console.log(req.body, req.query);
     const doc_data = await doctorModel.getDoctors();
     res.status(200).json({
       user_data: doc_data,
@@ -67,6 +67,14 @@ doctorController.getAppointmentByPatient = async (req, res) => {
       visit_date2: req.body.visit_date2,
     };
     const doc_data = await doctorModel.getAppointmentByPatient(input);
+
+    let fields = ["remark", "symptom_desc", "treatment_desc"];
+    const SECRET_KEY = process.env.SECRET;
+    const cryptr = new Cryptr(SECRET_KEY);
+    // console.log({ doc_data });
+
+    revertEncryption(doc_data, fields, cryptr);
+
     res.status(200).json({
       history_data: doc_data,
     });
@@ -83,14 +91,14 @@ doctorController.getAppointmentByDoctor = async (req, res) => {
       visit_date2: req.body.visit_date2,
     };
     const shouldDecrypt = req.body.decrypt;
-    console.log("ABHII>>>>>>>>>>", { shouldDecrypt });
+    // console.log("ABHII>>>>>>>>>>", { shouldDecrypt });
     const doc_data = await doctorModel.getAppointmentByDoctor(input);
-    console.log({ input, doc_data });
+    // console.log({ input, doc_data });
     if (shouldDecrypt) {
       let fields = ["remark", "symptom_desc", "treatment_desc"];
       const SECRET_KEY = process.env.SECRET;
       const cryptr = new Cryptr(SECRET_KEY);
-      console.log({ doc_data });
+      // console.log({ doc_data });
 
       revertEncryption(doc_data, fields, cryptr);
     }
@@ -125,7 +133,7 @@ doctorController.getAppointmentByDoctorPatient = async (req, res) => {
 doctorController.insertDoctor = async (req, res) => {
   try {
     let { ...input } = req?.body;
-    console.log({ input });
+    // console.log({ input });
 
     // insert pwd with hash
     bcrypt.hash(input.password, SALT_ROUND, async function (err, hash) {
@@ -148,9 +156,9 @@ doctorController.insertDoctor = async (req, res) => {
 doctorController.createAppointment = async (req, res) => {
   try {
     let { ...input } = req?.body;
-    console.log({ input });
+    // console.log({ input });
     const SECRET_KEY = process.env.SECRET;
-    console.log("KEY++++++", SECRET_KEY);
+    // console.log("KEY++++++", SECRET_KEY);
     //   var iv = Cryptr.randomBytes(16);
     const cryptr = new Cryptr(SECRET_KEY);
 
@@ -160,7 +168,7 @@ doctorController.createAppointment = async (req, res) => {
     input.remark = _remark;
     input.symptom_desc = _symptom_desc;
     input.treatment_desc = _treatment_desc;
-    console.log({ input });
+    // console.log({ input });
     // console.log("DECRY", decryptField(_treatment_desc));
 
     const doc_data = await doctorModel.createAppointment(input);
@@ -175,7 +183,7 @@ doctorController.createAppointment = async (req, res) => {
 doctorController.updateDoctor = async (req, res) => {
   try {
     let { ...input } = req?.body;
-    console.log({ input });
+    // console.log({ input });
     const doc_data = await doctorModel.updateDoctor(input);
     res.status(200).json({
       doc_data: doc_data,

@@ -15,7 +15,7 @@ adminModel.getAdmins = async () => {
 adminModel.getAdmin = async (input) => {
   try {
     let conn = await getConn();
-    console.log({ input });
+    // console.log({ input });
     return await executeProcedure(conn, input, "admin_select(?)");
   } catch (error) {
     console.log(error);
@@ -93,7 +93,7 @@ adminModel.updateAdmin = async (input) => {
 adminModel.updateDoctorActivation = async (input) => {
   try {
     let conn = await getConn();
-    console.log({ input });
+    // console.log({ input });
     return await executeProcedure(
       conn,
       input,
@@ -106,7 +106,7 @@ adminModel.updateDoctorActivation = async (input) => {
 adminModel.updateUserPassword = async (input) => {
   try {
     let conn = await getConn();
-    console.log({ input });
+    // console.log({ input });
     // with bcrypt
     return await executeProcedure(
       conn,
@@ -121,7 +121,7 @@ adminModel.updateUserPassword = async (input) => {
 adminModel.updateUserPasswordStep2 = async (input) => {
   try {
     let conn = await getConn();
-    console.log({ input });
+    // console.log({ input });
     // with bcrypt
     return await executeProcedure(
       conn,

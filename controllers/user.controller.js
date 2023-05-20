@@ -9,10 +9,10 @@ userController.userLogin = async (req, res) => {
     let { user_type, login_id, password } = req?.body;
     let plain_password = password;
     let input = { user_type, login_id };
-    console.log({ input });
+    // console.log({ input });
 
     const user_data = await userModel.userLogin(input);
-    console.log({ user_data });
+    // console.log({ user_data });
     if (user_data && user_data?.length && user_data[0].user_id != null) {
       let hashed = user_data[0].password;
       bcrypt.compare(plain_password, hashed).then((result) => {

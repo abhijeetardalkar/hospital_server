@@ -39,6 +39,7 @@ patientController.getPatientByID = async (req, res) => {
 patientController.insertPatient = async (req, res) => {
   try {
     let { ...input } = req?.body;
+
     // let input = {
     //   login_id,
     //   password,
@@ -72,7 +73,8 @@ patientController.insertPatient = async (req, res) => {
     });
     // const user_data = await patientModel.insertPatient(input);
     // console.log({ user_data });
-
+    // console.log({ input });
+    return;
     // res.status(200).json({
     //   user_data: user_data,
     // });

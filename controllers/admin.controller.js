@@ -52,7 +52,7 @@ adminController.insertAdmin = async (req, res) => {
     // console.log({ req });
 
     const user_data = await adminModel.insertAdmin(input);
-    console.log({ user_data });
+    // console.log({ user_data });
     res.status(200).json({
       user_data: user_data,
     });
@@ -96,7 +96,7 @@ adminController.updateUserPassword = async (req, res) => {
     // return;
     const user_data = await adminModel.updateUserPassword(input);
 
-    console.log("step1>>>> ", { user_data });
+    // console.log("step1>>>> ", { user_data });
     if (user_data && user_data?.length) {
       if (user_data[0].result == 0) {
         user_data = null; //no user exist
@@ -104,25 +104,25 @@ adminController.updateUserPassword = async (req, res) => {
         let plain_password = input.password;
         let hashed = user_data[0].password;
         delete input.password;
-        console.log("step2", { input });
+        // console.log("step2", { input });
 
         // bcrypt the password and
 
         let new_password = input.password_new;
-        console.log({ new_password, hashed, plain_password });
+        // console.log({ new_password, hashed, plain_password });
         bcrypt.compare(plain_password, hashed).then(async (result) => {
-          console.log({ result });
+          // console.log({ result });
           if (result) {
             // insert pwd with hash
             bcrypt.hash(new_password, SALT_ROUND, async function (err, hash) {
               // Store hash in your password DB.
               input.password_new = hash;
-              console.log("step2 saving...", { input });
+              // console.log("step2 saving...", { input });
 
               const _user_data = await adminModel.updateUserPasswordStep2(
                 input
               );
-              console.log({ _user_data });
+              // console.log({ _user_data });
               res.status(200).json({
                 user_data: _user_data,
               });

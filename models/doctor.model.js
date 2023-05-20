@@ -113,7 +113,7 @@ doctorModel.insertDoctor = async (input) => {
 doctorModel.updateDoctor = async (input) => {
   try {
     let conn = await getConn();
-    console.log("upd>>", { input });
+    // console.log("upd>>", { input });
     return await executeProcedure(
       conn,
       input,
